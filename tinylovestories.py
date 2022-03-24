@@ -27,8 +27,18 @@ paragraph       = []
 writtenby       = []
 
 def split_author_from_story(x):
-    #print(x)
-    story =  x.split('. —')[0]+"."
+    print(x)
+    if len(x.split('. —'))>1:
+        story =  x.split('. —')[0]+"."
+    elif len(x.split('.—'))>1:
+        story =  x.split('.—')[0]+"."
+    elif len(x.split('? —'))>1:
+        story = x.split('? —')[0]+"?"
+    elif len(x.split('” —'))>1:
+        story = x.split('” —')[0]+'”'
+    else:
+        print("######## Story has no author attached in the story ########")
+        story = x
     #author =  x.split('. —')[1]
     return story#, author
 
@@ -41,13 +51,14 @@ for url,pubdate in zip(tls_url_list,tls_pubdate_list):
         if csv_latest_date != "" and latest_date == csv_latest_date:
             break
         else :
-            sub_heading     = story.find('h2.eoo0vm40', first = True)
-            story_paragraph = story.find('p.evys1bk0', first = True)
-            author          = story.find('em.e1gzwzxm0', first = True)
-            if sub_heading != None and story_paragraph != None and author != None:
+            sub_heading     = story.find('h2.css-ow6j0y.eoo0vm40', first = True)
+            story_paragraph = story.find('p.css-g5piaz.evys1bk0', first = True)
+            author          = story.find('em.css-2fg4z9.e1gzwzxm0', first=False)#, first = True)
+            print(sub_heading, story_paragraph, author)
+            if sub_heading != None and story_paragraph != None and author:
                 subheading.append(sub_heading.text)
                 paragraph.append(story_paragraph.text)
-                writtenby.append(author.text)
+                writtenby.append(author[-1].text)
                 publishdatetime.append(pubdate)
     #pubdate.date()
     #print(len(publishdatetime), len(subheading), len(paragraph), len(writtenby)) 
