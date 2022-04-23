@@ -10,6 +10,11 @@ The tiny_love_urls_util.py makes the API call and get the all URLS of Tiny Love 
 and save the URLS and their Published date to a plain Text file.
 And tinylovestories.py scrapes the stories from the URLS and save them to a comma seperated file.
 
-TinyLoveStories_urls.txt - Contains Tiny Love Stories URLS and Published date.
-tinystories.csv          - Contains Published Date, Story Name, Story and Author
+`TinyLoveStories_urls.txt` - Contains Tiny Love Stories URLS and Published date.
+`tinystories.csv`          - Contains Published Date, Story Name, Story and Author
 
+# Usage
+1. Make a `.env` file after cloning the repo and add your NYT developer API key as -
+```SECRET_KEY=abcxyz```
+
+2. Run `tinylovestories.py` (python3 tinylovestories.py)
